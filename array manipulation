@@ -1,0 +1,36 @@
+#include<stdio.h>
+int
+main ()
+{
+  int m, n, i, j, y,max;
+  long int large, l[10000], a, b, k;
+  scanf ("%d%d", &n, &m);
+  for (i = 1; i <= n; i++)
+    {
+      l[i] = 0;}
+      for (y = 0; y < m; y++)
+	{
+	  scanf ("%ld%ld%ld", &a, &b, &k);
+	  if (a < b)
+	    {
+	      for (j = a; j <= b; j++)
+		{
+		  l[j] = l[j] + k;
+		}
+	    }
+	  if (b < a)
+	    {
+	      for (j = b; j <= a; j++)
+		{
+		  l[j] = l[j] + k;
+		}
+	    }
+	}
+    max=l[1];
+    for(i=1;i<=n;i++){
+        if(l[i]>max){
+            max=l[i];
+        }
+    }
+    printf("%d",max);
+}
