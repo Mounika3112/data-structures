@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct singlelist{
+    int rno;
+    struct singlelist *next;
+};
+struct singlelist *createnode()
+{
+    int data;
+    struct singlelist *t;
+    printf("enter data_x:");
+    scanf("%d",&data);
+    t=(struct singlelist*)malloc(sizeof(struct singlelist));
+    t->rno=data;
+    t->next=NULL;
+    return t;
+}
+struct singlelist *createlist(int n)
+{
+    int i;
+    struct singlelist *head=NULL,*tail,*newn;
+    for(i=0;i<n;i++)
+    {
+      newn=createnode();
+      if(i==0){
+          head=newn;
+          tail=newn;
+      }
+      else
+      {
+          tail->next=newn;
+          tail=newn;
+      }
+    }
+    return head;
+}
+void displaylist(struct singlelist *head)
+{
+    struct singlelist *temp=head;
+    if(head==NULL)
+    {
+    }
+    while(temp!=NULL)
+    {
+        printf("|%d|\t",temp->rno);
+        temp=temp->next;
+}
+}
+struct singlelist *insertAtBegin(struct singlelist *head,int x)
+{
+    struct singlelist *newn;
+    newn=(struct singlelist *)malloc(sizeof(struct singlelist));
+    newn->rno=x;
+    newn->next=NULL;
+    if(head==NULL)
+    {
+        head=newn;
+    }
+    else
+    {
+        newn->next=head;
+        head=newn;
+    }
+    return head;
+}
+int main()
+{
+    int n,x;
+    struct singlelist *head=NULL;
+    printf("enter size of list:");
+    scanf("%d",&n);
+    head=createlist(n);
+    displaylist(head);
+    printf("\nenter element to be inserted at beginning:");
+    scanf("%d",&x);
+    head=insertAtBegin(head,x);
+    displaylist(head);
+   
+}
