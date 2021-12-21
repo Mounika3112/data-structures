@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct polynomialterm
+{
+    int coeff,expo;
+    struct polynomialterm* next;
+}pt;
+pt *createnode()
+{
+    int v1,v2;
+    pt *newn;
+    printf("enter coefficient value:");
+    scanf("%d",&v1);
+    printf("enter exponential value:");
+    scanf("%d",&v2);
+    newn=(pt*)malloc(sizeof(pt));
+    newn->coeff=v1;
+    newn->expo=v2;
+    newn->next=NULL;
+    return newn;
+}
+pt* create(int n)
+{
+    pt *head=NULL,*newn,*t;
+    int i;
+    for(i=0;i<n;i++)
+    {
+        newn=createnode();
+        if(i==0)
+        head=newn;
+        else
+        {
+            t->next=newn;
+            t=newn;
+        }
+    }
+    return head;
+}
+void display(pt *head)
+{
+    while(head!=NULL)
+    {
+        printf("%dx^%d+",head->coeff,head->expo);
+        head=head->next;
+    }
+}
+int main()
+{
+    int n,i;
+    pt *head=NULL;
+    printf("enter n:");
+    scanf("%d",&n);
+    head=create(n);
+    for(i=0;i<n;i++)
+    {
+    display(head);
+    }
+}
