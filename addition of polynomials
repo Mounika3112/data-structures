@@ -1,0 +1,143 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct polynomialterm
+{
+    int coeff,expo;
+    struct polynomialterm *next;
+}pt;
+pt *createlist()
+{
+    pt* newn=NULL,*head,*l=NULL;
+    int i,n,coeff,expo;
+    printf("enter size-n:");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+     newn=(pt*)malloc(sizeof(pt));
+     printf("enter coefficient:");
+     scanf("%d",&coeff);
+     printf("enter exponent:");
+     scanf("%d",&expo);
+     newn->coeff=coeff;
+     newn->expo=expo;
+     if(i==0)
+     {
+        head=newn;
+     }
+     else
+     {
+        l->next=newn; 
+     }
+     l=newn;
+    }
+    return head;
+}
+void swap(pt* a,pt* b)
+{
+    int t1,t2;
+    t1=a->coeff;
+    t2=a->expo;
+    a->coeff=b->coeff;
+    b->coeff=t1;
+    a->expo=b->expo;
+    b->expo=t2;
+}
+pt* sortlist(pt* head)
+{
+    int i,j,n;
+    pt* t=head;
+    printf("enter n:");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        t=head;
+        for(j=0;j<n-i-1;j++)
+        {
+            if(t->expo<t->next->expo)
+            {
+            swap(t,t->next);
+            }
+            t=t->next;
+        }
+    }
+    return head;
+}
+void display(pt* head)
+{
+    pt* t=head;
+    if(head==NULL)
+        return;
+    else
+    {
+        while(t!=NULL)
+        {
+            printf("%dx^%d+",t->coeff,t->expo);
+            t=t->next;
+        }
+    }
+    printf("\n");
+}
+pt* add(pt* f1,pt* f2)
+{
+    pt *newn,*h3=NULL,*l;
+    while(f1 && f2)
+    {
+        newn=(pt*)malloc(sizeof(pt));
+        newn->next=NULL;
+        if(f1->expo>f2->expo)
+        {
+            newn->coeff=f1->coeff;
+            newn->expo=f1->expo;
+            f1=f1->next;
+        }
+        else if(f1->expo<f2->expo)
+        {
+            newn->coeff=f2->coeff;
+            newn->expo=f2->expo;
+            f2=f2->next;
+        }
+        else
+        {
+           newn->coeff=f1->coeff+f2->coeff;
+           newn->expo=f1->expo;
+           f1=f1->next;
+           f2=f2->next;
+        }
+        l=newn;
+    }
+    if(f1==NULL)
+    {
+        while(f2!=NULL)
+        {
+            newn=(pt*)malloc(sizeof(pt));
+            newn->next=NULL;
+            newn->coeff=f2->coeff;
+            newn->expo=f2->expo;
+            f2=f2->next;
+        }
+    }
+    if(f2==NULL)
+    {
+        while(f1!=NULL)
+        {
+            newn=(pt*)malloc(sizeof(pt));
+            newn->next=NULL;
+            newn->coeff=f1->coeff;
+            newn->expo=f1->expo;
+            f1=f1->next;
+        }
+    }
+    return h3;
+}
+void main()
+{
+    pt *h1=NULL,*h2=NULL,*f1=NULL,*f2=NULL,*h3=NULL;
+    h1=createlist();
+    h2=createlist();
+    f1=sortlist(h1);
+    f2=sortlist(h2);
+    display(f1);
+    display(f2);
+    h3=add(f1,f2);
+    display(h3);
+}
