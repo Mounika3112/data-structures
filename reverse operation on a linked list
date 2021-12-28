@@ -1,0 +1,94 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct Node
+{
+    int data;
+    struct Node *next;
+}Node;
+Node *create()
+{
+Node *newn=NULL,*head,*l;
+int n,i,data;
+printf("enter size of list-n:");
+scanf("%d",&n);
+for(i=0;i<n;i++)
+{
+    newn=(Node*)malloc(sizeof(Node));
+    printf("enter data:");
+    scanf("%d",&data);
+    newn->data=data;
+    if(i==0)
+    {
+        head=newn;
+    }
+    else
+    {
+       l->next=newn; 
+    }
+    l=newn;
+}
+return head;
+}
+void swap(Node *a,Node *b)
+{
+    int t1;
+    t1=a->data;
+    a->data=b->data;
+    b->data=t1;
+}
+Node *reverseOperation(Node *head)
+{
+    Node *t=head;
+    int n,i;
+    printf("enter size:");
+    scanf("%d",&n);
+    if(head==NULL)
+    return NULL;
+    else
+    {
+        for(i=0;i<n-1;i++)
+        {
+            if((t->data)%2==0 &&(t->next->data)%2==0)
+            {
+                if(i==0)
+                {
+                swap(t,t->next);
+                head=t;
+                t=t->next;
+                }
+                else
+                {
+                swap(t,t->next);
+                t=t->next;
+                }
+            }
+            else
+            {
+                if(t->next!=NULL)
+                t=t->next;
+            }
+        }
+        return head;
+    }
+}
+void display(Node *head)
+{
+    Node *t=head;
+    if(head==NULL)
+    return;
+    else
+    {
+        while(t!=NULL)
+        {
+            printf("%d\t",t->data);
+            t=t->next;
+        }
+    }
+}
+void main()
+{
+    Node *h1=NULL,*h2=NULL;
+    h1=create();
+    h2=reverseOperation(h1);
+    display(h2);
+}
