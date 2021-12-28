@@ -1,0 +1,142 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct cllnode
+{
+    int data;
+    struct cllnode *next;
+}cn;
+cn *createnode()
+{
+    int data;
+    cn *newn;
+    newn=(cn*)malloc(sizeof(cn));
+    printf("enter data:");
+    scanf("%d",&data);
+    newn->data=data;
+    newn->next=NULL;
+    return newn;
+}
+cn *createlist()
+{
+    cn *head,*newn,*l;
+    int n,i;
+    printf("enter size-n:");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        newn=createnode();
+        if(i==0)
+        {
+        head=newn;
+        }
+        else
+        {
+           l->next=newn;
+        }
+        l=newn;
+    }
+    l->next=head;
+    return head;
+}
+cn *insert(cn *head)
+{
+    int data,pos,i,n;
+    cn *t=head,*newn,*t2;
+    printf("enter size of taken list-n:");
+    scanf("%d",&n);
+    printf("enter position:");
+    scanf("%d",&pos);
+    newn=createnode();
+    if(pos==1)
+    {
+        while(t->next!=head)
+        {
+            t=t->next;
+        }
+        t->next=newn;
+        newn->next=head;
+        head=newn;
+    }
+    if(pos==n)
+    {
+        while(t->next!=head)
+        {
+            t=t->next;
+        }
+        t->next=newn;
+        newn->next=head;
+    }
+    if(pos>1 && pos<n)
+    {
+            for(i=1;i<pos-1;i++)
+            {
+                t=t->next;
+            }
+            t2=t->next;
+            t->next=newn;
+            newn->next=t2;
+    }
+    return head;
+}
+cn *delete(cn *head)
+{
+    int pos,i,n;
+    cn *t=head,*t2;
+    printf("\nenter size of taken list-n:");
+    scanf("%d",&n);
+    printf("enter position:");
+    scanf("%d",&pos);
+    if(pos==1)
+    {
+        while(t->next!=head)
+        {
+            t=t->next;
+        }
+        t2=head->next;
+        t->next=t2;
+        head=t2;
+    }
+    if(pos==n)
+    {
+        while(t->next->next!=head)
+        {
+            t=t->next;
+        }
+        t2=head;
+        t->next=t2;
+    }
+    if(pos>1 && pos<n)
+    {
+    for(i=1;i<pos-1;i++)
+    {
+        t=t->next;
+    }
+    t2=t->next->next;
+    t->next=t2;
+    }
+    return head;
+}
+void display(cn *head)
+{
+    cn *t=head;
+    if(head==NULL)
+    return;
+    else
+    {
+        while(t->next!=head)
+        {
+            printf("%d\t",t->data);
+            t=t->next;
+        }
+        printf("%d",t->data);
+    }
+}
+void main()
+{
+    cn *h=NULL,*h1=NULL,*h2=NULL;
+    h=createlist();
+    h1=insert(h);
+    display(h1);
+    h2=delete(h);
+    display(h2);
+}
