@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct arraylist
+{
+    int data;
+    struct arraylist *next;
+}al;
+al *createnode()
+{
+    int data;
+    al *newn;
+    newn=(al*)malloc(sizeof(al));
+    printf("enter data:");
+    scanf("%d",&data);
+    newn->data=data;
+    newn->next=NULL;
+    return newn;
+}
+al *createlist()
+{
+    al *head=NULL,*newn,*l;
+    int m,i;
+    printf("\nenetr size of inner list:");
+    scanf("%d",&m);
+    for(i=0;i<m;i++)
+    {
+        newn=createnode();
+        if(i==0)
+        {
+            head=newn;
+        }
+        else
+        {
+            l->next=newn;
+        }
+        l=newn;
+    }
+    return head;
+}
+void display(al *head)
+{
+    al *t=head;
+    if(head==NULL)
+    return;
+    else
+    {
+        while(t!=NULL)
+        {
+            printf(" %d",t->data);
+            t=t->next;
+        }
+        printf(" NULL");
+    }
+}
+int main()
+{
+    int n,i,m;
+    al *h=NULL;
+    printf("enter size of an array:");
+    scanf("%d",&n);
+    int a[n];
+    for(i=0;i<n;i++)
+    {
+        h=createlist();
+        display(h);
+    }
+}
