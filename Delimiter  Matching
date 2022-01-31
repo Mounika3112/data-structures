@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<string.h>
+void main()
+{
+    char a[50] = "[(a+b)*c^(e/f)]+h*g/i-k";
+    int c=0;
+    int Delimeter(char a[50])
+    {
+        int n=strlen(a),i,j;
+        for(i=0;i<n;i++)
+        {
+            if((a[i]=='[')||(a[i]=='(')||(a[i]=='{'))
+            {
+                c++;
+            for(j=i+1;j<n;j++)
+            {
+                if((a[j]==']') || (a[j]==')') || (a[j]=='}'))
+                {
+                    if((a[i]=='[' && a[j]==']') || (a[i]=='(' && a[j]==')') || (a[i]=='{' && a[j]=='}'))
+                    {
+                        c--;
+                        a[j]='K';
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    }
+    Delimeter(a);
+    if(c==0)
+    {
+        printf("valid");
+    }
+    else
+    {
+        printf("invalid");
+    }
+}
+//output:valid
