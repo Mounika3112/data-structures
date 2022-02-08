@@ -1,0 +1,57 @@
+#include <stdio.h>
+int top=-1,a[100];
+void push(int c )
+{
+    top=top+1;
+    a[top]=c;
+}
+int pop()
+{
+    int f=a[top];
+    top--;
+    return f;
+}
+int precedence(char c)
+{
+if(c=='^')
+return 3;
+if((c=='*') || (c=='/')|| (c==%))
+return 2;
+if((c=='+') || (c=='-'))
+return 1;
+else
+return 0;
+}
+int main()
+{
+    int i,l,x;
+    char s[100],s1[100]="",c;
+    printf("enter exepression:");
+    scanf("%s",s);
+    l=strlen(s);
+    while(s[i]!='\0')
+    {
+        c=s[i];
+        if(isdigit(c) || isalpha(c))
+        {
+            strcat(s1,c,1);
+        }
+        else
+        {
+            if(top==-1)
+            push(c);
+            else
+            {
+                precedence(c);
+                if(precedence(c)>precedence(a[top]))
+                {
+                    
+                }
+            }
+        
+            
+        }
+        i++;
+    }
+    return 0;
+}
