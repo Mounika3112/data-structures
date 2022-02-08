@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<math.h>
+int top=-1,a[100];
+void push(int c )
+{
+    top=top+1;
+    a[top]=c;
+}
+int pop()
+{
+    int f=a[top];
+    top--;
+    return f;
+}
+int operation(int op1,int op2,char c)
+{
+   if(c=='^') 
+   return pow(op1,op2);
+   else if(c=='/')
+   return op1/op2;
+   else if(c=='+')
+   return op1+op2;
+   else if(c=='-')
+   return op1-op2;
+   else
+   return op1*op2;
+}
+int main()
+{
+    char s[100],c;
+    int i=0,x,op1,op2,y;
+    printf("enter postfix exepression:");
+    scanf("%s",s);
+    while(s[i]!='\0')
+    {
+        c=s[i];
+        if(isdigit(c))
+        {
+            x=c-'0';
+            push(x);
+        }
+        else
+        {
+           op2=pop();
+           op1=pop();
+           y=operation(op1,op2,c);
+           push(y);
+        }
+       i++; 
+    }
+    printf("after postfix evaluation: %d",pop());
+}
+output-----
+i/p:231*+9-
+o/p:-4
