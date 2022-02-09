@@ -1,5 +1,7 @@
 #include <stdio.h>
-int top=-1,a[100];
+#include <ctype.h>
+int top=-1,a[100],j=0,i=0;
+char p[100];
 void push(int c )
 {
     top=top+1;
@@ -11,21 +13,29 @@ int pop()
     top--;
     return f;
 }
-int precedence(char c)
+int priority(char c)
 {
 if(c=='^')
 return 3;
-if((c=='*') || (c=='/')|| (c==%))
+if((c=='*') || (c=='/')|| (c=='%'))
 return 2;
 if((c=='+') || (c=='-'))
 return 1;
 else
 return 0;
 }
+void precedence(char c)
+{
+    if(priority(c)<priority(a[top]))
+    {
+        p[j]=pop();
+        j++;
+    }
+}
 int main()
 {
-    int i,l,x;
-    char s[100],s1[100]="",c;
+    int x;
+    char s[100],c;
     printf("enter exepression:");
     scanf("%s",s);
     while(s[i]!='\0')
@@ -33,7 +43,8 @@ int main()
         c=s[i];
         if(isdigit(c) || isalpha(c))
         {
-            strcat(s1,c,1);
+            p[j]=c;
+            j++;
         }
         else
         {
@@ -41,27 +52,35 @@ int main()
             push(c);
             else
             {
-                precedence(c);
-                if(precedence(c)>precedence(a[top]))
+                if(c=='(')
+                push(c);
+                else if(c==')')
                 {
-                    push(c);
+                    x=pop();
+                    while(x!='(')
+                    {
+                        p[j]=x;
+                        j++;
+                        x=pop();
+                    }
                 }
                 else
                 {
-                    x=pop();
-                    strcat(s1,x,1);
-                    if(precedence(a[top])>=precedence(c))
-                    {
-                         x=pop();
-                         strcat(s1,x,1);
-                    }
+                    precedence(c);
                     push(c);
+                    if(priority(a[top])==priority(a[top-1]))
+                    {
+                        p[j]=pop();
+                    }
                 }
             }
         }
         i++;
     }
-    
+    while(top!=-1)
+    {
+        p[j++]=pop();
+    }
+     printf("%s",p);
     return 0;
-    printf()
 }
