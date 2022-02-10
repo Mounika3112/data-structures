@@ -26,10 +26,13 @@ return 0;
 }
 void precedence(char c)
 {
-    if(priority(c)<priority(a[top]))
+    if(priority(c)<=priority(a[top]))
     {
+        while(priority(c)<=priority(a[top]))
+        {
         p[j]=pop();
         j++;
+        }
     }
 }
 int main()
@@ -68,10 +71,6 @@ int main()
                 {
                     precedence(c);
                     push(c);
-                    if(priority(a[top])==priority(a[top-1]))
-                    {
-                        p[j]=pop();
-                    }
                 }
             }
         }
