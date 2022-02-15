@@ -1,0 +1,71 @@
+#include<stdio.h>
+int s[4][5];
+int maze[4][5] = {
+    {1, 0, 1, 1, 0},
+    {1, 1, 1, 0, 1},
+    {0, 1, 0, 1, 1},
+    {1, 1, 1, 1, 1}};
+ int solvemaze(int r,int c)
+ {
+     if(r==3 && c==4)
+     {
+     s[r][c]=1;
+     return 1;
+     }
+     if(r>=0 && c>=0 && r<4 && c<5 && maze[r][c]==1 && s[r][c]==0)
+     {
+         s[r][c]=1;
+     if(solvemaze(r-1,c)) //north
+     return 1;
+     //if(solvemaze(r-1,c+1))//northeast
+     //return 1;
+     if(solvemaze(r,c+1)) //east
+     return 1;
+     //if(solvemaze(r+1,c+1)) //southeast
+     //return 1;
+     if(solvemaze(r+1,c)) //south
+     return 1;
+     //if(solvemaze(r+1,c-1)) //southwest
+     //return 1;
+     if(solvemaze(r,c-1)) //west
+     return 1;
+     //if(solvemaze(r-1,c-1)) //northwest
+     //return 1;
+     s[r][c]=0;
+     }
+     return 0;
+ }
+ void solution()
+ {
+     for(int i=0;i<4;i++)
+    {
+        for(int j=0;j<5;j++)
+        {
+            if(s[i][j]==1)
+            {
+              printf("(%d,%d)->",i,j);
+            }
+        }
+    }
+ }
+int main()
+{
+    int i,j;
+    for(i=0;i<4;i++)
+    {
+        for(j=0;j<5;j++)
+        {
+            s[i][j]=0;
+        }
+    }
+    if(solvemaze(0,0))
+    {
+        solution();
+    }
+    else
+    {
+        printf("no solution");
+    }
+    return 0;
+}
+o/p;-
