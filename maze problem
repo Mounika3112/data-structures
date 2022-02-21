@@ -7,7 +7,7 @@ int maze[4][5] = {
     {1, 1, 1, 1, 1}};
  int solvemaze(int r,int c)
  {
-     if(r==3 && c==4)
+     if(r==3 && c==4 && maze[r][c]==1)
      {
      s[r][c]=1;
      return 1;
@@ -15,23 +15,24 @@ int maze[4][5] = {
      if(r>=0 && c>=0 && r<4 && c<5 && maze[r][c]==1 && s[r][c]==0)
      {
          s[r][c]=1;
+     if(solvemaze(r+1,c)) //south
+     return 1;
+     if(solvemaze(r,c+1)) //east
+     return 1;
      if(solvemaze(r-1,c)) //north
+     return 1;
+     if(solvemaze(r,c-1)) //west
      return 1;
      //if(solvemaze(r-1,c+1))//northeast
      //return 1;
-     if(solvemaze(r,c+1)) //east
-     return 1;
      //if(solvemaze(r+1,c+1)) //southeast
      //return 1;
-     if(solvemaze(r+1,c)) //south
-     return 1;
      //if(solvemaze(r+1,c-1)) //southwest
      //return 1;
-     if(solvemaze(r,c-1)) //west
-     return 1;
      //if(solvemaze(r-1,c-1)) //northwest
      //return 1;
      s[r][c]=0;
+     return 0;
      }
      return 0;
  }
@@ -68,4 +69,4 @@ int main()
     }
     return 0;
 }
-o/p;-
+//output->: (0,0)→(1,0)→(1,1)→(2,1)→(3,1)→(3,2)→(3,3)→(3,4) 
