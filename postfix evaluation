@@ -47,7 +47,7 @@ int main()
            push(y);
         }
        i++; 
-    }
+   }
     printf("after postfix evaluation: %d",pop());
 }
 output-----
