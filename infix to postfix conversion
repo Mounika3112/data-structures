@@ -9,7 +9,8 @@ int pop(){
     int f=a[top];
     top--;
     return f;}
-int priority(char c){
+int priority(char c)
+{
 if(c=='^')
 return 3;
 if((c=='*') || (c=='/')|| (c=='%'))
@@ -17,42 +18,64 @@ return 2;
 if((c=='+') || (c=='-'))
 return 1;
 else
-return 0;}
-void precedence(char c){
-    if(priority(c)<=priority(a[top])){
-        while(priority(c)<=priority(a[top])){
+return 0;
+}
+void precedence(char c)
+{
+    if(priority(c)<=priority(a[top]))
+    {
+        while(priority(c)<=priority(a[top]))
+        {
         p[j]=pop();
         j++;
-        } } }
+        } 
+    }
+ }
 int main()
 {
     int x;
     char s[100],c;
     printf("enter exepression:");
     scanf("%s",s);
-    while(s[i]!='\0') {
+    while(s[i]!='\0')
+    {
         c=s[i];
-        if(isdigit(c) || isalpha(c))  {
+        if(isdigit(c) || isalpha(c)) 
+        {
             p[j]=c;
-            j++;   }
-        else  {
+            j++;  
+         }
+        else 
+        {
             if(top==-1)
             push(c);
-            else    {
+            else   
+            {
                 if(c=='(')
                 push(c);
-                else if(c==')') {
+                else if(c==')')
+                {
                     x=pop();
-                    while(x!='('){
+                    while(x!='(')
+                    {
                         p[j]=x;
                         j++;
-                        x=pop();    }   }
-                else  {
+                        x=pop();  
+                    } 
+               }
+                else 
+                {
                     precedence(c);
-                    push(c); }  }   }
-        i++;  }
-    while(top!=-1)  {
-        p[j++]=pop();   }
+                    push(c);
+                    } 
+                } 
+          }
+        i++; 
+        }
+    while(top!=-1)
+    {
+        p[j++]=pop();
+        }
      printf("%s",p);
     return 0;
 }
