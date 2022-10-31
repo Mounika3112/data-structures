@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct list
+{
+    int data;
+    struct list *next;
+};
+struct list *createnode(int d)
+{
+    struct list *newn;
+    newn=(struct list*)malloc(sizeof(struct list));
+    newn->data=d;
+    newn->next=NULL;
+    return newn;
+}
+struct list *merge(struct list *head1,struct list *head2)
+{
+    struct list *head=NULL,*tail,*newn,*t1=head1,*t2=head2;
+    while(t1!=NULL && t2!=NULL)
+    {
+    if(head==NULL)
+    {
+    if(t1->data<t2->data)
+    {
+        newn=createnode(t1->data);
+        t1=t1->next;
+    }
+    else if(t1->data>t2->data)
+    {
+        newn=createnode(t2->data);
+        t2=t2->next;
+    }
+    else
+    {
+        newn=createnode(t2->data);
+        t2=t2->next;
+        t1=t1->next;
+    }
+    head=newn;
+    tail=newn;
+    }
+    else{
+    if(t1->data<t2->data)
+    {
+        newn=createnode(t1->data);
+        t1=t1->next;
+    }
+    else if(t1->data>t2->data)
+    {
+        newn=createnode(t2->data);
+        t2=t2->next;
+    }
+    else
+    {
+        newn=createnode(t2->data);
+        t2=t2->next;
+        t1=t1->next;
+    }
+    tail->next=newn;
+    tail=newn;
+    }
+    }
+    if(t1==NULL)
+    tail->next=t2;
+    else
+    tail->next=t1;
+    return head;
+}
+struct list *create(int n)
+{
+    struct list *head=NULL,*tail,*newn;
+    int i,d;
+    for(i=0;i<n;i++)
+    {
+        printf("enter data:");
+        scanf("%d",&d);
+        newn=createnode(d);
+        if(i==0)
+        {
+            head=newn;
+            tail=newn;
+        }
+        else
+        {
+            tail->next=newn;
+            tail=newn;
+        }
+    }
+    return head;
+}
+void display(struct list *head)
+{
+    struct list *t=head;
+   while(t!=NULL)
+   {
+       printf("%d\t",t->data);
+       t=t->next;
+   }
+   printf("\n");
+}
+int main()
+{
+    int n1,n2;
+    struct list *head1=NULL,*head2=NULL,*head=NULL;
+    printf("enter length of list1:");
+    scanf("%d",&n1);
+    head1=create(n1);
+    printf("enter length of list2:");
+    scanf("%d",&n2);
+    head2=create(n2);
+    display(head1);
+    display(head2);
+    head=merge(head1,head2);
+    display(head);
+    return 0;
+}
